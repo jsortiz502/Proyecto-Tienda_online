@@ -1,0 +1,35 @@
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript jquery='full' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'ccs/style.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{message}}</h1>
+    <ul class="list-group">
+        {% for product in products %}
+        <li class="list-group-item">
+            {{product.title}}
+
+            {% if product.stock %}
+                <span class="text-success">Disponible</span>
+            {% else %}
+                <span class="text-danger">No Disponible</span>
+            {% endif %}
+        </li>
+    {% empty %}
+        <h3>No hay productos en la tienda esta pelado</h3>
+    {% endfor %}
+    </ul>
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>
