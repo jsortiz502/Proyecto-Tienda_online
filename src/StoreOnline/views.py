@@ -1,7 +1,11 @@
-from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth import logout
+from StoreOnline.forms import RegisterForm
+
 
 def index(request):
     context={
@@ -19,12 +23,25 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        #print("sfdssssssssssssssssssssssssssssssssssssssss",username)
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            print('Usted esta auntenticado')
+            messages.success(request, 'Bienvenido {}'.format(user.username))
+            return redirect('index')
         else:
-            print('Es hacker')
+            messages.error(request,'Usuario o Contraseña incorrectos')
         
-    return render(request, 'users/login.html',{})
+    return render(request, 'users/login.html', {})
 
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Sesion cerrada correctamente')
+    return redirect('login')
+
+def register(request):
+    form = RegisterForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/register.html', context)

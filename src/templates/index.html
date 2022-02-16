@@ -14,23 +14,38 @@
     <title>{{title}}</title>
 </head>
 <body>
-    <h1>{{message}}</h1>
-    <ul class="list-group">
-        {% for product in products %}
-        <li class="list-group-item">
-            {{product.title}}
+    <div class="container">
+        {% if messages %}
+            {% for messages in messages %}
+                <div class="alert {% if messages.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+                    <button type="button" class="close" data-dismiss="alert">X</button>
+                    {{messages}}
+                </div>
+            {% endfor %}
+        {% endif %} 
+        <div class="row">
+            <div class="col">
+                <center><h1>{{message}}</h1></center>
+                <ul class="list-group">
+                    {% for product in products %}
+                    <li class="list-group-item">
+                        {{product.title}}
 
-            {% if product.stock %}
-                <span class="text-success">Disponible</span>
-            {% else %}
-                <span class="text-danger">No Disponible</span>
-            {% endif %}
-        </li>
-    {% empty %}
-        <h3>No hay productos en la tienda esta pelado</h3>
-    {% endfor %}
-    </ul>
-    <img src="{% static 'img/playera.jpg' %}" alt="">
+                        {% if product.stock %}
+                            <span class="text-success">Disponible</span>
+                        {% else %}
+                            <span class="text-danger">No Disponible</span>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                        <h3>No hay productos en la tienda esta pelado</h3>
+                    {% endfor %}
+                </ul>
+                <img src="{% static 'img/playera.jpg' %}" alt="">      
+            </div>
+        </div>
+    </div>
+
 </body>
 <script src="{% static 'js/main.js' %}"></script>
 </html>
