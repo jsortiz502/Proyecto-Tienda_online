@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from StoreOnline import views
+from django.urls import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('usuarios/login', views.login_view, name='login'),
     path('usuarios/logout', views.logout_view, name='logout'),
     path('usuarios/register', views.register, name='register'),
+    path('productos/', include('products.urls', namespace='products')),
 ]

@@ -1,0 +1,28 @@
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript jquery='full' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> {% block title %}{% endblock title %} </title>
+</head>
+<body>
+    {% include 'base./navbar.html' %}
+    <div class="container">
+        {% include 'base/message.html' %}
+        <div class="row">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</body>
+<script src="http://kit.fontawesome.com/ed5652a487.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

@@ -1,31 +1,9 @@
-{% load bootstrap4 %}
-
+{% extends 'base/base.html' %}
 {% load static %}
-
-{% bootstrap_css %}
-
-{% bootstrap_javascript jquery='full' %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        {% if messages %}
-            {% for messages in messages %}
-                <div class="alert {% if messages.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
-                    <button type="button" class="close" data-dismiss="alert">X</button>
-                    {{messages}}
-                </div>
-            {% endfor %}
-        {% endif %}
-        <div class=" row">
+{% block title %}
+    Login
+{% endblock title %}
+{% block content %}
             <div class="col">
                 <center><h1>Login Form</h1></center>
                 <form method="post">{% csrf_token %}
@@ -42,7 +20,5 @@
             </div>
         </div>
     </div>
+{% endblock content %}
     
-</body>
-<script src="{% static 'js/main.js' %}"></script>
-</html>
