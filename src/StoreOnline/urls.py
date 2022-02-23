@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from StoreOnline import views
 from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.index, name="index"),
     path('usuarios/login', views.login_view, name='login'),
     path('usuarios/logout', views.logout_view, name='logout'),
     path('usuarios/register', views.register, name='register'),
-    path('productos/', include('products.urls', namespace='products')),
+    path('admin/', admin.site.urls),
+    path('productos/', include('products.urls', namespace='products'),),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

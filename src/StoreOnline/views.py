@@ -10,7 +10,7 @@ from products.models import Product
 
 
 def index(request):
-    product = Product.objects.all().order_by('-title')
+    product = Product.objects.all().order_by('title')
     context={
         
             'title': 'Productos',
@@ -20,8 +20,8 @@ def index(request):
     return render(request, "index.html", context)
 
 def login_view(request):
-    if request.user.is_authenticate:
-        return redirect('index')
+    if request.user.is_authenticated:
+        return redirect('product/index')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -30,7 +30,7 @@ def login_view(request):
         if user:
             login(request, user)
             messages.success(request, 'Bienvenido {}'.format(user.username))
-            return redirect('index')
+            return redirect('products:index')
         else:
             messages.error(request,'Usuario o Contraseña incorrectos')
         
@@ -42,16 +42,15 @@ def logout_view(request):
     return redirect('login')
 
 def register(request):
-    if request.user.is_authenticate:
+    if request.user.is_authenticated:
         return redirect('index')
     form = RegisterForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        user = form.save()
-        
+        user = form.save()  
         if user:
             login(request, user)
             messages.success(request, 'El usuario ha sido creado correctamente')
-            return redirect('index')
+            return redirect('products:index')
     context = {
         'form': form,
     }
