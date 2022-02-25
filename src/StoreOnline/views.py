@@ -5,14 +5,15 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth import logout
 from StoreOnline.forms import RegisterForm
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from products.models import Product
+
+from users.models import User
 
 
 def index(request):
     product = Product.objects.all().order_by('title')
     context={
-        
             'title': 'Productos',
             'message': 'Listado de productos',
             'products': product,
@@ -21,7 +22,7 @@ def index(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('product/index')
+        return redirect('index')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     #Apps nuestras
     'products',
+    'categories',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'StoreOnline.urls'
+
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {

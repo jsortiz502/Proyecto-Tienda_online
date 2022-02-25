@@ -1,0 +1,50 @@
+[
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "hamburguer",
+        "description": "rico",
+        "price": "4.00",
+        "slug": "hamburguer",
+        "image": "products/hamburguesa.jpg",
+        "create_at": "2022-02-23T23:07:03.382Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "chuzo desgranado",
+        "description": "rico rico",
+        "price": "5.00",
+        "slug": "chuzo-desgranado",
+        "image": "products/chuzo.jpeg",
+        "create_at": "2022-02-23T23:24:38.475Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "perrito",
+        "description": "El perrito salchichudito",
+        "price": "5.00",
+        "slug": "perrito",
+        "image": "products/perrito.jpg",
+        "create_at": "2022-02-23T23:29:13.804Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "bocadillo",
+        "description": "bocadillo con quesito",
+        "price": "3.00",
+        "slug": "bocadillo",
+        "image": "products/bocadillo.jpg",
+        "create_at": "2022-02-23T23:31:11.369Z"
+    }
+}
+]
