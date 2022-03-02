@@ -8,3 +8,5 @@ users/migrations/*
 users/__pycache__/*
 categories/migrations/*
 categories/__pycache__/*
+carts/migrations/*
+carts/__pycache__/*
