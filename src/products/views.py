@@ -27,6 +27,7 @@ class ProductSearchView(generic.ListView):
         return Product.objects.filter(filter)
     
     def query(self):
+        
         return self.request.GET.get('q')
     
     def get_context_data(self, **kwargs):
