@@ -11,4 +11,7 @@ categories/__pycache__/*
 carts/migrations/*
 carts/__pycache__/*
 products/templatetags/__pycache__/*
+orders/__pycache__/*
+orders/migrations/*
+
 
