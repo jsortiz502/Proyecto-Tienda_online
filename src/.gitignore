@@ -13,5 +13,5 @@ carts/__pycache__/*
 products/templatetags/__pycache__/*
 orders/__pycache__/*
 orders/migrations/*
-
-
+shipping_address/__pycache__/*
+shipping_address/migrations/*

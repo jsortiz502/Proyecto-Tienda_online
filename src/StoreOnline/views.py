@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth import logout
 from StoreOnline.forms import RegisterForm
-#from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from products.models import Product
 
 from users.models import User
@@ -31,6 +31,8 @@ def login_view(request):
         if user:
             login(request, user)
             messages.success(request, 'Bienvenido {}'.format(user.username))
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET['next'])
             return redirect('products:index')
         else:
             messages.error(request,'Usuario o Contraseña incorrectos')

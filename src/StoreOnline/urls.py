@@ -19,6 +19,7 @@ from StoreOnline import views
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from StoreOnline import settings
 
 urlpatterns = [
     path('usuarios/login', views.login_view, name='login'),
@@ -27,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', include('products.urls', namespace='products'),),
     path('carrito/', include('carts.urls', namespace='carts'),),
-    path('ordenes/', include('orders.urls', namepace='orders'),),
+    path('ordenes/', include('orders.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:
