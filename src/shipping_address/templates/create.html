@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="col">
+        <div class="h3">
+            Nueva Direccion
+        </div>
+        <div class="class">
+            {% include 'snippets/form.html' with message='Agregar' %}
+        </div>
+    </div>
+{% endblock content %}

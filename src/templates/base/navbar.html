@@ -1,6 +1,7 @@
 {% url 'login' as login %}
 {% url 'register' as register %}
 {% url 'carts:cart' as cart %}
+{% url 'shipping_address:shipping_address' as shipping_address %}
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a href="{% url 'products:index' %}" class="navbar-brand">Store online</a>
@@ -14,13 +15,21 @@
                     Mi carrito <span class="fas fa-shopping-cart"></span>
                 </a>
             </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item{% if request.path == shipping_address %} activate {% endif %}">
+                    <a href="{{shipping_address}}" class="nav-link">
+                        Mis Direcciones <span class="fas fa-location-arrow"></span>
+                    </a>
+                </li>
+            {% endif %}  
         </ul>
         <ul class="nav navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="navbar-item">
                     <a href="{% url 'logout' %}" class="nav-link">
                         <span class="fas fa-sign-out-alt"></span>
-                        Logout</a>
+                        Logout
+                    </a>
                 </li>                   
             {% else %}
                 <li class="navbar-item" {% if request.path == login %}active{% endif %}>

@@ -6,6 +6,13 @@
         <div class="h3">
             Mis Direcciones
         </div>
+        <a href="{% url 'shipping_address:create' %}">Agregar Nueva Direccion</a>
+        <div class="mt-2">
+            {% for shipping_Address in object_list %}
+                <div class="mt-2">
+                    {% include 'snippets/shipping_Address.html' %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
 {% endblock content %}
