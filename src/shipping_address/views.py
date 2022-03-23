@@ -10,6 +10,9 @@ from django.shortcuts import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from carts.utils import get_or_create_cart
+from orders.utils import get_or_create_order
+from django.http import HttpResponseRedirect
 
 
 
@@ -23,6 +26,15 @@ def create(request):
         shipping_address.user = request.user
         shipping_address.default = not request.user.has_shipping_address()
         shipping_address.save()
+        
+        if request.GET.get('next'):
+            if request.GET['next'] == reverse('orders:address'):
+                cart = get_or_create_cart(request)
+                order = get_or_create_order(cart, request)
+                
+                order.update_shipping_address(shipping_address)
+                return HttpResponseRedirect(reques.GET['next'])
+                
         messages.success(request, 'Direccion Creada con Exito')
         return redirect('shipping_address:shipping_address')
     return render(request, 'create.html', {'form':form})
@@ -30,13 +42,13 @@ def create(request):
 @login_required(login_url='login')
 def default(request, pk):
     shipping_address = get_object_or_404(ShippingAddress, pk=pk)
-    if request.user.id != shipping_addres.user_id:
+    if request.user.id != shipping_address.user_id:
         return redirect('carts:cart')
     if request.user.has_shipping_address():
         request.user.shipping_address.update_default()
     shipping_address.update_default(True)
-    
     return redirect('shipping_address:shipping_address')
+
 class ShippingAddressListView(LoginRequiredMixin, generic.ListView):
     login_url = 'login'
     model = ShippingAddress
@@ -58,18 +70,20 @@ class ShippingAddressUpdateView(LoginRequiredMixin, SuccessMessageMixin, generic
     def dispatch(self, request, *args, **kwargs):
         if request.user.id != self.get_object().user_id:
             return redirect('carts:cart')
-        
         return super(ShippingAddressUpdateView, self).dispatch(request, *args, **kwargs)
             
 class ShippingAddressDeleteView(LoginRequiredMixin, generic.DeleteView):
     login_url = 'login'
-    models = ShippingAddress
+    model = ShippingAddress
     template_name = 'delete.html'
-    succes_url = reverse_lazy('shipping_address:shipping_address')
+    success_url = reverse_lazy('shipping_address:shipping_address')
+    
     
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().default:
             return redirect('shipping_address:shipping_address')
         if request.user.id != self.get_object().user_id:
             return redirect('carts:cart')
+        if self.get_object().has_orders():
+            return redirect('shipping_address:shipping_addresses')
         return super(ShippingAddressDeleteView, self).dispatch(request, *args, **kwargs)
