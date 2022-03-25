@@ -2,16 +2,18 @@
     <div class="card-header">
         <div class="card-body">
             <h5 class="card-title">
-              {{shipping_Address.address}}
+              {{shipping_address.address}}
             </h5>
         </div>
         <div class="card-title">
-            {{shipping_Address.reference}}
+            {{shipping_address.reference}}
         </div>
         <div class="card-title">
-            {{shipping_Address.postal_code}}
+            {{shipping_address.postal_code}}
         </div>
+        
         {% if edit %}
+
             <div class="mt-2">
                 <a href="{% url 'shipping_address:update' shipping_Address.pk %}" class="btn btn-info">Editar</a>
 

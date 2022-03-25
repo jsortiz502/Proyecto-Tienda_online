@@ -16,11 +16,11 @@
                 <tbody>
                     <tr>
                         <td>Productos:</td>
-                        <td>{{cart.total | price_format}}</td>
+                        <td>{{cart.total }}</td>
                     </tr>
                     <tr>
                         <td>Envio:</td>
-                        <td>{{order.shipping_total | price_format}}</td>
+                        <td>{{order.shipping_total }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -30,12 +30,12 @@
             <div class="font-weight-bold text-danger">
                 Total(impuestos incluidos)
                 <div class="d-inline-block">
-                    {{order.total | price_format}}
+                    {{order.total }}
                 </div>
             </div>
         </div>
         <div class="mt-2">
-            <a href="{% url 'orders:address' %}" class="btn btn-warning">
+            <a href="{{next_url}}" class="btn btn-warning">
                 Confirmar Pedido
             </a>
         </div>

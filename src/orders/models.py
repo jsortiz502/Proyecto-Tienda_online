@@ -24,7 +24,7 @@ class Order(models.Model):
     shipping_total = models.DecimalField(default=5, max_digits=8, decimal_places=2)
     total = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     created_at = models.DateField(auto_now_add=True)
-    shiping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE)
+    shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.order_id
@@ -41,6 +41,14 @@ class Order(models.Model):
     
     def update_shipping_address(self, shipping_address):
         self.shipping_address = shipping_address
+        self.save()
+        
+    def cancel(self):
+        self.status = OrderStatus.CANCELED
+        self.save()
+        
+    def complete(self):
+        self.status = OrderStatus.COMPLETED
         self.save()
     
     def update_total(self):
