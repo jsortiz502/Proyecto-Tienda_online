@@ -1,9 +1,16 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
+from django.urls import reverse
 
 
 class Mail:
+    @staticmethod
+    def get_absolute_url(url):
+        if settings.DEBUG:
+            return 'http://localhost:8000{}'.format(
+                reverse(url)
+            )
     @staticmethod
     def send_complete_order(order, user):
         subject = 'Tu pedido ha sido enviado'
@@ -11,6 +18,7 @@ class Mail:
         content = template.render({
             'user':user,
             'order':order,
+            'next_url':Mail.get_absolute_url('orders:completed')
         })
         
         message = EmailMultiAlternatives(

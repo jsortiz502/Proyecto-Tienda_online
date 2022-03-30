@@ -31,7 +31,7 @@ from decouple import config
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'oscarprueadjango@gmail.com'
+EMAIL_HOST_USER = 'oscarpruebadjango@gmail.com'
 EMAIL_HOST_PASSWORD = config('USER_MAIL_PASSWORD')#Env
 EMAIL__PORT = 587
 EMAIL_USE_TLS = True
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'shipping_address',
+    'promo_code',
 ]
 
 MIDDLEWARE = [

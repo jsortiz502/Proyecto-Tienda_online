@@ -8,9 +8,9 @@
         </div>
         <a href="{% url 'shipping_address:create' %}">Agregar Nueva Direccion</a>
         <div class="mt-2">
-            {% for shipping_Address in object_list %}
+            {% for shipping_address in object_list %}
                 <div class="mt-2">
-                    {% include 'snippets/shipping_Address.html' with edit=True %}
+                    {% include 'snippets/shipping_address.html' with edit=True %}
                 </div>
             {% endfor %}
         </div>

@@ -44,7 +44,7 @@
                     <div class="font-weight-bold">
                         Codigo promocional
                     </div>
-                    <form>
+                    <form id="promocode-form" action="{% url 'promo_code:validar' %}">
                         <input type="text", name="code", value="" class="form-control" placeholder="codigo-promociona">
                     </form>
                 </div>
@@ -61,14 +61,35 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col">
-        {% url 'orders:complete' as next_url %}
-        {% include 'snippets/resume.html' with next_url=next_url %}
-        <div class="mt-2">
-            <a href="{% url 'orders:cancel' %}" class="btn btn-danger">
-                Cancelar orden
-            </a>
-        </div>
+    
+</div>
+<div class="col">
+    {% url 'orders:complete' as next_url %}
+    {% include 'snippets/resume.html' with next_url=next_url %}
+    <div class="mt-2">
+        <a href="{% url 'orders:cancel' %}" class="btn btn-danger">
+            Cancelar orden
+        </a>
     </div>
 </div>
 {% endblock content %}
+
+{% block javascript %}
+    <script>
+        const form = document.getElementById('promocode-form')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            const input = this.code
+            const code = input.value
+            const url = this.action +"?code"+code
+
+            console.log(url)
+
+            fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                console.log(response.name)
+            })
+        })
+    </script>
+{% endblock javascript %}
