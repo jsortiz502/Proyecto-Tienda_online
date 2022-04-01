@@ -13,3 +13,5 @@ orders/__pycache__/*
 orders/migrations/*
 shipping_address/__pycache__/*
 shipping_address/migrations/*
+billing_profiles/__pycache__/*
+billing_profiles/migrations/*

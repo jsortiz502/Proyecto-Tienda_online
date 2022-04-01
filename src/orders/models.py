@@ -65,7 +65,7 @@ class Order(models.Model):
         return 0
     
     def get_total(self):
-        return self.cart.total + self.shipping_total
+        return self.cart.total + self.shipping_total - decimal.Decimal(self.get_discount())
     
     #los *args reciben tuplas y listas y los **kwargs diccionarios y cotextos
 def set_order_id(sender, instance, *args, **kwargs):

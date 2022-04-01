@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'orders',
     'shipping_address',
     'promo_code',
+    'billing_profiles',
 ]
 
 MIDDLEWARE = [
