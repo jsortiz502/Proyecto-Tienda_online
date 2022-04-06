@@ -44,13 +44,11 @@ def address(request, cart, order):
     
     
 @login_required(login_url='login')
-@validate_cart_and_order 
 def select_address(request):
     shipping_addresses = request.user.addresses
     return render(request, 'select_address.html', {
         'breadcrumb':breadcrumb(address=True),
-        'shipping_address':shipping_addresses,
-            
+        'shipping_addresses':shipping_addresses,          
     })
     
 @login_required(login_url='login')
