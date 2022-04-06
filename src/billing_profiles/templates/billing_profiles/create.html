@@ -5,6 +5,23 @@
         <div class="h3">
             Nuevo metodo
         </div>
+        <div class="">
+            <form id="payment-form">
+                <div id="payment-element">
+                  <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit">
+                  <div class="spinner hidden" id="spinner"></div>
+                  <span id="button-text">Paga Ahora</span>
+                </button>
+                <p id="card-error" role="alert"></p>
+                <p class="result-message hidden">
+                    Pago exitoso, ver el resultado en su
+                    <a href="" target="_blanck">XXXXXXX.</a>
+                </p>
+                <div id="mensaje de pago" class="hidden"></div>
+            </form>
+        </div>
     </div>
 {% endblock content %}
 
